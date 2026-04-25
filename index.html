@@ -14,13 +14,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* กำหนดตัวแปรสีที่ดึงมาจากภาพ cover.jpg */
+        /* กำหนดตัวแปรสี */
         :root {
-            --bamboo-green: #2b4c30;      /* สีเขียวใบไผ่ */
-            --wood-dark: #3a2b24;         /* สีน้ำตาลเข้มกรอบไม้ */
-            --gold-accent: #c49a45;       /* สีทององค์พระ/ตัวหนังสือ */
-            --gold-light: #f5eedc;        /* สีทองอ่อนๆ พื้นหลัง */
-            --bg-paper: #faf8f2;          /* สีพื้นหลังเว็บ (ครีมอ่อนธรรมชาติ) */
+            --bamboo-green: #2b4c30;      
+            --wood-dark: #3a2b24;         
+            --gold-accent: #c49a45;       
+            --gold-light: #f5eedc;        
+            --bg-paper: #faf8f2;          
         }
 
         body {
@@ -33,7 +33,7 @@
             color: var(--bamboo-green);
         }
         
-        /* Header แบบไล่สีเขียวป่าไผ่ ขอบล่างสีทอง */
+        /* Header */
         .bg-theme {
             background: linear-gradient(135deg, #1e3622 0%, var(--bamboo-green) 100%);
             color: white;
@@ -47,25 +47,24 @@
             background-color: #ffffff;
         }
 
-        /* ตกแต่งรูป Cover ให้ดูมีมิติเหมือนป้าย และแสดงเต็มรูป */
+        /* รูป Cover */
         .hero-img {
             width: 100%;
-            max-width: 850px; /* จำกัดความกว้างบนจอคอมไม่ให้ใหญ่คับจอเกินไป */
-            height: auto; /* ปล่อยความสูงอัตโนมัติ รูปจะไม่ถูกตัด และไม่มีขอบสีใดๆ มากวนใจ */
-            border-radius: 12px; /* ลบมุมให้ภาพดูละมุนขึ้นเล็กน้อย */
-            box-shadow: 0 15px 35px rgba(0,0,0,0.25); /* ใส่เงาให้ป้ายดูมีมิติลอยขึ้นมา */
+            max-width: 850px;
+            height: auto; 
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25); 
             cursor: pointer;
             transition: all 0.4s ease;
-            margin: 0 auto; /* จัดกึ่งกลางหน้าจอ */
+            margin: 0 auto; 
             display: block;
-            /* สังเกตว่าเราลบ background-color และ border สีน้ำตาลออกไปแล้ว */
         }
-        
         .hero-img:hover {
-            transform: scale(1.02); /* ขยายรูปนิดหน่อยเวลาเอาเมาส์ชี้ */
-            box-shadow: 0 20px 40px rgba(43, 76, 48, 0.4); /* ตอนชี้เมาส์ ให้เงาเปล่งแสงเป็นสีเขียวป่าไผ่เบาๆ */
+            transform: scale(1.02); 
+            box-shadow: 0 20px 40px rgba(43, 76, 48, 0.4); 
         }
 
+        /* Gallery */
         .gallery-img {
             width: 100%;
             height: 250px;
@@ -75,14 +74,14 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
             transition: transform 0.4s ease;
-            cursor: pointer; /* เพิ่มให้เมาส์เปลี่ยนเป็นรูปมือตอนชี้ */
+            cursor: pointer;
         }
         .gallery-img:hover {
             transform: scale(1.03);
             border-color: var(--gold-accent);
         }
 
-        /* กล่องรายละเอียด */
+        /* รายละเอียด */
         .buddha-details {
             background-color: var(--gold-light);
             border-left: 5px solid var(--gold-accent);
@@ -97,7 +96,6 @@
             padding: 15px;
             position: relative;
         }
-        
         .monk-president::before {
             content: '';
             position: absolute;
@@ -107,7 +105,7 @@
             pointer-events: none;
         }
 
-        /* การ์ดระดับเจ้าภาพ ไล่สีให้ดูพรีเมียม */
+        /* การ์ดระดับเจ้าภาพ */
         .sponsor-card {
             border-radius: 10px;
             border: 1px solid var(--gold-accent);
@@ -133,7 +131,7 @@
             border-bottom: none;
         }
 
-        /* Accordion งบประมาณ */
+        /* Accordion */
         .accordion-button {
             color: var(--wood-dark);
         }
@@ -154,7 +152,7 @@
             border-radius: 10px;
         }
 
-        /* ปุ่มสีเขียวป่าไผ่ */
+        /* ปุ่มสีเขียว */
         .btn-custom {
             background-color: var(--bamboo-green);
             color: white;
@@ -174,6 +172,85 @@
         footer .text-warning {
             color: #fcf6ba !important;
         }
+
+        /* =========================================
+           สไตล์สำหรับซองผ้าป่า / ใบฎีกา (A4 Format)
+           ========================================= */
+        .envelope-wrapper {
+            background: #e9ecef;
+            padding: 30px 15px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+        }
+
+        .envelope-page {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 210mm; /* ขนาด A4 */
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 40px 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            color: #000000;
+            font-family: 'Sarabun', sans-serif;
+            position: relative;
+            border: 8px double var(--gold-accent); 
+        }
+
+        .envelope-logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        .envelope-header-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--bamboo-green);
+            margin-bottom: 5px;
+        }
+
+        .sponsor-tier-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--wood-dark);
+            border-bottom: 2px dashed var(--gold-accent);
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        .name-list {
+            list-style: none;
+            padding-left: 0;
+            margin-bottom: 0;
+            font-size: 1.1rem;
+        }
+
+        .col-names-2 { column-count: 2; column-gap: 40px; }
+        .col-names-3 { column-count: 3; column-gap: 20px; }
+
+        .name-list li {
+            margin-bottom: 8px;
+            break-inside: avoid;
+        }
+
+        .name-list li::before {
+            content: "•";
+            color: var(--gold-accent);
+            font-weight: bold;
+            display: inline-block; 
+            width: 1em;
+        }
+
+        .envelope-footer {
+            margin-top: 50px;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -192,7 +269,6 @@
         <!-- แบนเนอร์ / รูปภาพหลัก -->
         <div class="row mb-5">
             <div class="col-12 text-center">
-                <!-- เพิ่ม onclick และเรียกใช้ Modal -->
                 <img src="images/cover.jpg" alt="ป้ายงานผ้าป่าสวนไผ่อภิญญาญาณ" class="hero-img" onclick="showImage(this.src)" data-bs-toggle="modal" data-bs-target="#imageModal">
             </div>
         </div>
@@ -205,12 +281,9 @@
                     <!-- ประธานฝ่ายสงฆ์ -->
                     <div class="monk-president mb-4 text-center shadow-sm">
                         <h5 class="theme-color fw-bold mb-3">🙏 ประธานอุปถัมภ์ฝ่ายสงฆ์</h5>
-                        
-                        <!-- เพิ่มรูปภาพหลวงตาสมพร -->
                         <div class="mb-3">
                             <img src="images/luang-ta-somporn.jpg" alt="พระครูภาวนาธรรมวิสุทธิ์ (หลวงตาสมพร ธมฺมธีโร)" class="img-fluid rounded shadow-sm" style="max-height: 250px; border: 3px solid var(--gold-accent); object-fit: cover;">
                         </div>
-
                         <h5 class="fw-bold mb-1" style="color: var(--wood-dark);">พระครูภาวนาธรรมวิสุทธิ์ (หลวงตาสมพร ธมฺมธีโร)</h5>
                         <p class="mb-0 text-muted">เจ้าคณะอำเภอปากคาด, เจ้าอาวาสวัดสุทธิวนาราม, จังหวัดบึงกาฬ</p>
                     </div>
@@ -273,7 +346,6 @@
                         <li class="list-group-item bg-transparent"><strong>วันเสาร์ที่ ๒๐ มิถุนายน ๒๕๖๙ (วันทอดถวายและเริ่มจัดสร้าง)</strong><br>เวลา ๐๗.๓๐ น. ถวายภัตตาหารเช้าแด่พระสงฆ์<br>เวลา ๐๘.๐๐ น. ประกอบพิธีมงคลฤกษ์เริ่มจัดสร้างองค์พระประธาน<br>เวลา ๐๙.๓๙ น. พิธีทอดถวายผ้าป่าสามัคคี เป็นอันเสร็จพิธี</li>
                     </ul>
 
-                    <!-- งบประมาณจัดสร้างไว้อ้างอิง -->
                     <h4 class="theme-color fw-bold border-bottom pb-2 mt-5">📊 โครงสร้างและงบประมาณการจัดสร้าง</h4>
                     <div class="alert mt-3 mb-2 text-center shadow-sm" style="background-color: var(--gold-light); border: 1px solid var(--gold-accent);">
                         <h5 class="fw-bold mb-0" style="color: var(--wood-dark);">งบประมาณรวมทั้งสิ้น ประมาณ ๓๗๐,๐๐๐ บาท</h5>
@@ -283,16 +355,16 @@
                     <div class="accordion shadow-sm" id="budgetAccordion">
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
                                     ส่วนที่ ๑: งานโครงสร้างและฐานราก (ประมาณ ๔๕,๐๐๐ บาท)
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#budgetAccordion">
+                            <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
                                 <div class="accordion-body">
                                     <ul>
-                                        <li>งานขุดดิน เทฐานราก และผูกเหล็กเส้น เพื่อรองรับน้ำหนักองค์พระปูน ขนาดความสูง ๕ เมตร</li>
-                                        <li>งานก่ออิฐ เทปูน โครงสร้างฐานชุกชี (ประทับแท่น) สำหรับรองรับองค์พระประธาน</li>
-                                        <li>จัดเตรียมช่องว่างบริเวณฐานพระ สำหรับบรรจุแผ่นดวง แผ่นทอง หรือสิ่งมงคล (ตามประเพณีการจัดสร้างองค์พระ)</li>
+                                        <li>งานขุดดิน เทฐานราก และผูกเหล็กเส้น เพื่อรองรับน้ำหนักองค์พระปูน</li>
+                                        <li>งานก่ออิฐ เทปูน โครงสร้างฐานชุกชี (ประทับแท่น)</li>
+                                        <li>จัดเตรียมช่องว่างบริเวณฐานพระ สำหรับบรรจุแผ่นดวง แผ่นทอง หรือสิ่งมงคล</li>
                                     </ul>
                                 </div>
                             </div>
@@ -300,16 +372,16 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
                                     ส่วนที่ ๒: งานหล่อขึ้นรูปองค์พระ (ประมาณ ๒๓๐,๐๐๐ บาท)
                                 </button>
                             </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#budgetAccordion">
+                            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
                                 <div class="accordion-body">
                                     <ul>
-                                        <li>งานหล่อขึ้นรูปด้วย <strong>ปูนคอนกรีตเสริมเหล็ก</strong> ตลอดทั้งองค์ เพื่อความมั่นคงถาวร</li>
-                                        <li>โครงสร้างมีความแข็งแรง ทนทานต่อสภาพอากาศ สามารถประดิษฐานได้ยาวนาน</li>
-                                        <li>ค่าบล็อกแม่พิมพ์ / นั่งร้าน สำหรับขึ้นรูปพระพุทธรูปหน้าตัก ๒.๕ เมตร</li>
+                                        <li>งานหล่อขึ้นรูปด้วย <strong>ปูนคอนกรีตเสริมเหล็ก</strong> ตลอดทั้งองค์</li>
+                                        <li>โครงสร้างมีความแข็งแรง ทนทานต่อสภาพอากาศ</li>
+                                        <li>ค่าบล็อกแม่พิมพ์ / นั่งร้าน สำหรับขึ้นรูปพระพุทธรูป</li>
                                         <li>ค่าแรงช่างผู้ดำเนินการ</li>
                                     </ul>
                                 </div>
@@ -318,16 +390,16 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
                                     ส่วนที่ ๓: งานตกแต่งพื้นผิวและประดับบารมี (เบื้องต้น ๖๐,๐๐๐ บาท)
                                 </button>
                             </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#budgetAccordion">
+                            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
                                 <div class="accordion-body">
                                     <ul>
-                                        <li>งานขัดแต่งพื้นผิวปูนคอนกรีตให้ <strong>เรียบเนียนสม่ำเสมอ</strong> ทั้งองค์</li>
-                                        <li>งานทาสีรองพื้น และ ทาสีทองคำ (มาตรฐานเบื้องต้น)</li>
-                                        <li>งานประดับ พลอยหรือคริสตัล บนลวดลายเครื่องทรงมหาจักรพรรดิ</li>
+                                        <li>งานขัดแต่งพื้นผิวปูนคอนกรีตให้ <strong>เรียบเนียนสม่ำเสมอ</strong></li>
+                                        <li>งานทาสีรองพื้น และ ทาสีทองคำ</li>
+                                        <li>งานประดับ พลอยหรือคริสตัล บนลวดลายเครื่องทรง</li>
                                     </ul>
                                 </div>
                             </div>
@@ -335,14 +407,14 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFour">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour">
                                     ส่วนที่ ๔: งานประกอบพิธีมงคลและค่าใช้จ่ายเบ็ดเตล็ด (ประมาณ ๓๕,๐๐๐ บาท)
                                 </button>
                             </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#budgetAccordion">
+                            <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
                                 <div class="accordion-body">
                                     <ul>
-                                        <li>ค่าจัดเตรียมสถานที่ เครื่องบวงสรวง และ บายศรี ในวันมงคลฤกษ์เริ่มจัดสร้าง</li>
+                                        <li>ค่าจัดเตรียมสถานที่ เครื่องบวงสรวง และ บายศรี ในวันมงคลฤกษ์</li>
                                         <li>จตุปัจจัยไทยธรรมถวายพระสงฆ์ ในพิธีเจริญพระพุทธมนต์</li>
                                     </ul>
                                 </div>
@@ -351,33 +423,31 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingFive">
-                                <button class="accordion-button collapsed fw-bold" style="color: var(--gold-accent);" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                <button class="accordion-button collapsed fw-bold" style="color: var(--gold-accent);" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive">
                                     ส่วนที่ ๕: แผนบริหารจัดการปัจจัยบริจาคส่วนเกิน
                                 </button>
                             </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#budgetAccordion">
+                            <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
                                 <div class="accordion-body bg-light">
-                                    <p class="small text-muted mb-3">ด้วยพลังศรัทธาของ คณะผู้บริหารและพนักงาน ธนาคารแห่งประเทศไทย หากมียอดปัจจัยร่วมบุญสูงกว่า งบประมาณเบื้องต้น ที่กำหนดไว้ คณะผู้จัดสร้างมีเจตนารมณ์อันแน่วแน่ที่จะนำ ปัจจัยส่วนเกินทั้งหมด ไปบริหารจัดการ เพื่อ ยกระดับความวิจิตรตระการตาขององค์พระ และ สร้างความยั่งยืนให้แก่สถานปฏิบัติธรรม โดยกำหนดลำดับความสำคัญ ดังต่อไปนี้:</p>
+                                    <p class="small text-muted mb-3">หากมียอดปัจจัยร่วมบุญสูงกว่างบประมาณเบื้องต้น คณะผู้จัดสร้างจะนำไปยกระดับองค์พระ และสร้างความยั่งยืนให้แก่สถานปฏิบัติธรรม ดังนี้:</p>
                                     
                                     <h6 class="theme-color fw-bold">ลำดับที่ ๑: ต่อยอดงานตกแต่งเครื่องทรงและผิวองค์พระ</h6>
                                     <ul class="small">
-                                        <li><strong>ยกระดับผิวทอง:</strong> เปลี่ยนจากการทาสีทอง เป็น “การปิดทองคำเปลวแท้” เพื่อความสุกปลั่งงดงาม</li>
-                                        <li><strong>ยกระดับเครื่องทรงมหาจักรพรรดิ:</strong> ใช้ อัญมณีหรือคริสตัลเกรดพรีเมียม ที่มีความแวววาวและทนทานต่อแสงแดด</li>
+                                        <li><strong>ยกระดับผิวทอง:</strong> เปลี่ยนเป็นการปิดทองคำเปลวแท้</li>
+                                        <li><strong>ยกระดับเครื่องทรง:</strong> ใช้อัญมณีหรือคริสตัลเกรดพรีเมียม</li>
                                     </ul>
 
-                                    <h6 class="theme-color fw-bold mt-3">ลำดับที่ ๒: งานภูมิทัศน์และแสงสว่างรอบองค์พระ</h6>
+                                    <h6 class="theme-color fw-bold mt-3">ลำดับที่ ๒: งานภูมิทัศน์และแสงสว่าง</h6>
                                     <ul class="small">
-                                        <li><strong>การติดตั้งระบบไฟส่องสว่าง (Solar Spotlight):</strong> เพื่อส่ององค์พระในเวลากลางคืน ให้เป็น ศูนย์รวมจิตใจ ของชุมชน</li>
-                                        <li><strong>การปรับปรุงภูมิทัศน์ลานธรรม:</strong> ปูพื้นกระเบื้องหรือเทคอนกรีตรอบฐานพระ เพื่อความเป็นระเบียบเรียบร้อย</li>
+                                        <li>ติดตั้งระบบไฟส่องสว่าง (Solar Spotlight) และปรับปรุงภูมิทัศน์รอบฐานพระ</li>
                                     </ul>
 
                                     <h6 class="theme-color fw-bold mt-3">ลำดับที่ ๓: กองทุนบำรุงรักษาสะพานบุญ</h6>
-                                    <p class="small mb-0">ปัจจัยส่วนที่เหลือ (หากมี) จะนำไปจัดตั้งเป็น <strong>“กองทุนบำรุงรักษาสะพานบุญ”</strong> เพื่อรองรับค่าใช้จ่ายในระยะยาว เช่น ค่าน้ำ ค่าไฟ การดูแลรักษาศาลาธรรมและพื้นที่โดยรอบ</p>
+                                    <p class="small mb-0">ปัจจัยส่วนที่เหลือ จะนำไปจัดตั้งเป็นกองทุนรองรับค่าใช้จ่ายในระยะยาว</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- สิ้นสุดส่วนงบประมาณ -->
 
                     <!-- ปุ่มแผนที่ -->
                     <div class="text-center mt-5">
@@ -388,12 +458,11 @@
                 </div>
             </div>
 
-            <!-- ส่วนช่องทางการบริจาค (โอนเงิน) -->
+            <!-- ส่วนช่องทางการบริจาค -->
             <div class="col-md-5 mb-4">
                 <div class="card p-4 h-100 text-center shadow">
                     <h4 class="theme-color fw-bold mb-4">🙏 ร่วมทำบุญได้ที่</h4>
                     
-                    <!-- รูป QR Code -->
                     <div class="p-3 mb-4 mx-auto bg-white border rounded shadow-sm" style="max-width: 220px;">
                         <img src="images/qr-code.jpg" alt="QR Code รับบริจาค" class="img-fluid rounded">
                     </div>
@@ -408,7 +477,6 @@
                     <div class="text-start small mt-2 p-3 rounded" style="background-color: #f8f9fa; border-left: 4px solid var(--bamboo-green);">
                         <p class="mb-2" style="color: var(--wood-dark);"><strong>ช่องทางการแจ้งความประสงค์และส่งหลักฐานร่วมบุญ:</strong></p>
                         
-                        <!-- ส่วนที่เพิ่ม QR Code Line -->
                         <div class="d-flex align-items-center bg-white p-2 mb-3 rounded border shadow-sm">
                             <div class="flex-grow-1 text-center border-end pe-2">
                                 <p class="mb-1 text-muted" style="font-size: 0.9em;">ติดต่อผ่าน Line ID</p>
@@ -421,12 +489,8 @@
                         </div>
                         
                         <ul class="mb-0 ps-3 text-muted" style="line-height: 1.6;">
-                            <li class="mb-2">
-                                <strong>กรณีรับเป็นเจ้าภาพ:</strong> แจ้ง ชื่อ-นามสกุล และระดับเจ้าภาพล่วงหน้า เพื่อจัดพิมพ์ซองผ้าป่า (จตุปัจจัยสามารถนำส่งภายหลังได้)
-                            </li>
-                            <li>
-                                <strong>กรณีโอนร่วมบุญแล้ว:</strong> กรุณาส่งหลักฐานการโอน หากอยู่ในเกณฑ์เจ้าภาพสามารถแจ้งชื่อพิมพ์ซองได้ หากตามกำลังศรัทธาจะนำสมทบเข้ากองผ้าป่าสามัคคีต่อไป
-                            </li>
+                            <li class="mb-2"><strong>กรณีรับเป็นเจ้าภาพ:</strong> แจ้ง ชื่อ-นามสกุล และระดับเจ้าภาพล่วงหน้า เพื่อจัดพิมพ์ซองผ้าป่า</li>
+                            <li><strong>กรณีโอนร่วมบุญแล้ว:</strong> กรุณาส่งหลักฐานการโอน หากอยู่ในเกณฑ์เจ้าภาพสามารถแจ้งชื่อพิมพ์ซองได้</li>
                         </ul>
                     </div>
 
@@ -437,7 +501,7 @@
         </div>
 
         <!-- ส่วนแกลเลอรี่รูปภาพ -->
-        <div class="row mt-4 mb-5">
+        <div class="row mt-4 mb-4">
             <div class="col-12">
                 <div class="d-flex align-items-center mb-4">
                     <hr class="flex-grow-1" style="border-color: var(--gold-accent); opacity: 0.5;">
@@ -469,7 +533,84 @@
             </div>
         </div>
 
-    </div>
+        <!-- ==========================================
+             ส่วนแสดงผลซองผ้าป่าและปุ่มดาวน์โหลด PDF
+             ========================================== -->
+        <div class="row mt-5 mb-5" id="envelope-section">
+            <div class="col-12 text-center mb-4">
+                <hr style="border-color: var(--gold-accent); opacity: 0.5;">
+                <h3 class="theme-color fw-bold mt-4">📜 รายนามเจ้าภาพทอดผ้าป่าสามัคคี</h3>
+                <p class="text-muted">ท่านสามารถตรวจสอบรายชื่อ และดาวน์โหลดใบฎีกา/ซองผ้าป่า เป็นรูปแบบ PDF ได้ที่นี่</p>
+                <button class="btn btn-lg btn-warning fw-bold shadow-sm text-dark mt-2" onclick="generatePDF(this)">
+                    📥 ดาวน์โหลดใบฎีกาผ้าป่า (PDF)
+                </button>
+            </div>
+
+            <div class="col-12">
+                <div class="envelope-wrapper">
+                    <!-- ส่วนที่จะถูกแคปเจอร์เป็น PDF -->
+                    <div id="envelope-to-print" class="envelope-page text-center">
+                        
+                        <!-- โลโก้ตราซองผ้าป่า -->
+                        <img src="images/seal.jpg" alt="ตราประทับสวนไผ่" class="envelope-logo">
+                        <h2 class="envelope-header-text">ขอเชิญร่วมเป็นเจ้าภาพทอดผ้าป่าสามัคคี</h2>
+                        <h4 class="fw-bold mb-3" style="color: #c49a45;">เพื่อสมทบทุนจัดสร้าง "พระพุทธมหาจักรพรรดิ"</h4>
+                        <p class="mb-4 text-dark" style="font-size: 1.1rem;">ทอดถวาย ณ สวนไผ่อภิญญาญาณ อ.เขมราฐ จ.อุบลราชธานี<br>วันเสาร์ที่ ๒๐ มิถุนายน พ.ศ. ๒๕๖๙</p>
+
+                        <!-- ประธานอุปถัมภ์ (5,000 บาท) -->
+                        <div class="mt-4">
+                            <h4 class="sponsor-tier-title">🌟 ประธานอุปถัมภ์</h4>
+                            <ul class="name-list text-center">
+                                <li>พล.ต.ท. สมเกียรติ ยิ่งเจริญ และครอบครัว</li>
+                                <li>คุณหญิง วรนุช พัฒนพงศ์ และบุตรธิดา</li>
+                                <li>นายธนาธิป - นางสิริพร เจริญทรัพย์ (บจก. เจริญทรัพย์มาร์เก็ตติ้ง)</li>
+                            </ul>
+                        </div>
+
+                        <!-- รองประธานอุปถัมภ์ (3,000 บาท) -->
+                        <div class="mt-4 text-start">
+                            <div class="text-center"><h4 class="sponsor-tier-title">✨ รองประธานอุปถัมภ์</h4></div>
+                            <ul class="name-list col-names-2">
+                                <li>นายสมชาย - นางสมหญิง รักษ์ธรรม</li>
+                                <li>ครอบครัว "วิจิตรจรรยา"</li>
+                                <li>น.ส. กานต์มณี ศรีเจริญ</li>
+                                <li>นายวีระศักดิ์ แสงทอง และเพื่อน</li>
+                                <li>คลินิกเวชกรรมหมอใจดี</li>
+                                <li>ร้านทองมงคลเจริญ เยาวราช</li>
+                            </ul>
+                        </div>
+
+                        <!-- ประธาน (1,000 บาท) -->
+                        <div class="mt-4 text-start">
+                            <div class="text-center"><h4 class="sponsor-tier-title">ดอกบัวทอง (ประธาน)</h4></div>
+                            <ul class="name-list col-names-3" style="font-size: 0.95rem;">
+                                <li>นายกิตติ มหาศาล</li>
+                                <li>นางสาวสุดา สุขใจ</li>
+                                <li>ครอบครัว แซ่ลิ้ม</li>
+                                <li>นายวันชัย ใจบุญ</li>
+                                <li>นางปราณี มีสุข</li>
+                                <li>น.ส.รัตนา พารวย</li>
+                                <li>ครอบครัว ทองดีเยี่ยม</li>
+                                <li>นายสมภพ คงมั่น</li>
+                                <li>นางสมใจ ใฝ่ธรรม</li>
+                                <li>ร้านกาแฟ บ้านสวน</li>
+                                <li>นายชัชวาล ศรีสดใส</li>
+                                <li>ผู้ไม่ประสงค์ออกนาม</li>
+                            </ul>
+                        </div>
+
+                        <!-- คำอวยพรปิดท้าย -->
+                        <div class="envelope-footer">
+                            <p class="mb-1 fw-bold text-dark">ขออำนาจคุณพระศรีรัตนตรัย จงดลบันดาลให้ท่านและครอบครัว</p>
+                            <p class="mb-0 text-dark">ประสบแต่ความสุข ความเจริญ ด้วยอายุ วรรณะ สุขะ พละ ปฏิภาณธนสารสมบัติ ทุกประการเทอญ</p>
+                        </div>
+
+                    </div> <!-- สิ้นสุด id="envelope-to-print" -->
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- End Container -->
 
     <!-- Footer -->
     <footer class="text-white text-center py-5 mt-4">
@@ -499,10 +640,44 @@
     <!-- Bootstrap 5 JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Script สำหรับขยายรูปภาพ -->
     <script>
-        function showImage(imgSrc) {
-            document.getElementById('expandedImg').src = imgSrc;
+        function generatePDF(btn) {
+            const originalText = btn.innerHTML;
+            btn.innerHTML = "⏳ กำลังสร้างไฟล์ PDF...";
+            btn.disabled = true;
+
+            // ระบบป้องกันปุ่มค้าง: ถ้าเกิน 5 วินาทีแล้วยังไม่เสร็จ ให้คืนค่าปุ่ม
+            const fallbackTimer = setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                alert("หมดเวลาเชื่อมต่อ! ระบบไม่สามารถอ่านรูปภาพได้เนื่องจากติดระบบรักษาความปลอดภัยของเบราว์เซอร์\n\nคำแนะนำ: \n1. ให้อัปโหลดเว็บขึ้นโฮสติ้งจริง\n2. หรือเปิดผ่าน Live Server\n3. หรือแปลงรูปภาพโลโก้เป็น Base64");
+            }, 5000);
+
+            const element = document.getElementById('envelope-to-print');
+            
+            const opt = {
+                margin:       0,
+                filename:     'ใบฎีกาผ้าป่า-สวนไผ่อภิญญาญาณ.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { 
+                    scale: 2, 
+                    useCORS: true, 
+                    allowTaint: true 
+                },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                // ถ้าสร้าง PDF สำเร็จ ให้ยกเลิกการนับเวลา แล้วคืนค่าปุ่ม
+                clearTimeout(fallbackTimer);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }).catch(err => {
+                clearTimeout(fallbackTimer);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                console.error("Error:", err);
+            });
         }
     </script>
 </body>
