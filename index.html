@@ -66,12 +66,14 @@
             margin-top: 2px;
         }
 
-        .name-grid-1 { display: grid; grid-template-columns: fit-content(100%); justify-content: center; gap: 8px; }
-        .name-grid-2 { display: grid; grid-template-columns: repeat(2, fit-content(50%)); justify-content: center; gap: 8px 40px; }
+        /* ปรับให้เป็น 3 คอลัมน์ทั้งหมด และลดหลั่นขนาดตัวอักษรตามระดับ */
+        .name-grid-1 { display: grid; grid-template-columns: repeat(3, fit-content(33%)); justify-content: center; gap: 8px 25px; font-size: 1.05rem; }
+        .name-grid-2 { display: grid; grid-template-columns: repeat(3, fit-content(33%)); justify-content: center; gap: 8px 25px; font-size: 1rem; }
         .name-grid-3 { display: grid; grid-template-columns: repeat(3, fit-content(33%)); justify-content: center; gap: 8px 25px; font-size: 0.95rem; }
         
+        /* รองรับการแสดงผลบนมือถือให้กลับมาเป็น 1 แถวต่อ 1 ชื่อเพื่อให้อ่านง่าย */
         @media (max-width: 768px) {
-            .name-grid-2, .name-grid-3 { grid-template-columns: fit-content(100%); }
+            .name-grid-1, .name-grid-2, .name-grid-3 { grid-template-columns: fit-content(100%); }
         }
     </style>
 </head>
