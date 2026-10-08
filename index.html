@@ -24,19 +24,8 @@
         .card { border:none; box-shadow:0 8px 16px rgba(43,76,48,.08); border-radius:12px; background:#fff; }
         .hero-img { width:100%; max-width:850px; height:auto; border-radius:12px; box-shadow:0 15px 35px rgba(0,0,0,.25); cursor:pointer; transition:all .4s; margin:0 auto; display:block; }
         .hero-img:hover { transform:scale(1.02); }
-        .gallery-img { width:100%; height:250px; object-fit:cover; border-radius:8px; border:3px solid #fff; box-shadow:0 4px 10px rgba(0,0,0,.1); margin-bottom:20px; transition:transform .4s; cursor:pointer; }
-        .gallery-img:hover { transform:scale(1.03); border-color:var(--gold-accent); }
-        .buddha-details { background:var(--gold-light); border-left:5px solid var(--gold-accent); padding:15px; border-radius:0 10px 10px 0; }
         .monk-president { background:#fff; border:2px solid var(--gold-accent); border-radius:10px; padding:15px; position:relative; }
         .monk-president::before { content:''; position:absolute; inset:0; background:var(--gold-accent); opacity:.05; pointer-events:none; }
-        .sponsor-card { border-radius:10px; border:1px solid var(--gold-accent); background:#fffcf5; overflow:hidden; }
-        .sponsor-card.tier-1 .card-header { background:linear-gradient(to right,#bf953f,#fcf6ba,#b38728); }
-        .sponsor-card.tier-2 .card-header { background:linear-gradient(to right,#b5b5b5,#e6e6e6,#a1a1a1); }
-        .sponsor-card.tier-3 .card-header { background:linear-gradient(to right,#cd7f32,#f5d08f,#b87333); }
-        .sponsor-card .card-header { font-weight:bold; }
-        .accordion-button { color:var(--wood-dark); }
-        .accordion-button:not(.collapsed) { background:var(--gold-light); color:var(--bamboo-green); font-weight:bold; }
-        .accordion-button:focus { box-shadow:0 0 0 .25rem rgba(196,154,69,.25); }
         .bank-box { background:var(--gold-light); border:2px dashed var(--bamboo-green); border-radius:10px; }
         .btn-custom { background:var(--bamboo-green); color:white; border:2px solid var(--bamboo-green); transition:all .3s; }
         .btn-custom:hover { background:white; color:var(--bamboo-green); }
@@ -66,14 +55,49 @@
             margin-top: 2px;
         }
 
-        /* ปรับให้เป็น 3 คอลัมน์ทั้งหมด และลดหลั่นขนาดตัวอักษรตามระดับ */
+        /* ตารางรายชื่อ 3 คอลัมน์ */
         .name-grid-1 { display: grid; grid-template-columns: repeat(3, fit-content(33%)); justify-content: center; gap: 8px 25px; font-size: 1.05rem; }
         .name-grid-2 { display: grid; grid-template-columns: repeat(3, fit-content(33%)); justify-content: center; gap: 8px 25px; font-size: 1rem; }
         .name-grid-3 { display: grid; grid-template-columns: repeat(3, fit-content(33%)); justify-content: center; gap: 8px 25px; font-size: 0.95rem; }
         
-        /* รองรับการแสดงผลบนมือถือให้กลับมาเป็น 1 แถวต่อ 1 ชื่อเพื่อให้อ่านง่าย */
         @media (max-width: 768px) {
             .name-grid-1, .name-grid-2, .name-grid-3 { grid-template-columns: fit-content(100%); }
+        }
+
+        /* สไตล์สำหรับส่วนภาพบรรยากาศวันงาน (Carousel & Grid) */
+        .carousel-item img {
+            width: 100%;
+            height: 480px;
+            object-fit: contain;
+            background-color: #1a1a1a;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            .carousel-item img { height: 260px; }
+        }
+
+        .grid-thumb-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            transition: all .3s;
+            cursor: pointer;
+        }
+        .grid-thumb-img:hover {
+            transform: scale(1.04);
+            border-color: var(--gold-accent);
+            box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+        }
+
+        /* Transition นุ่มนวลสำหรับการสลับภาพอัตโนมัติ */
+        #randomGridContainer {
+            transition: opacity 0.5s ease-in-out;
+        }
+        .grid-fading {
+            opacity: 0 !important;
         }
     </style>
 </head>
@@ -113,14 +137,13 @@
     </div>
 
     <div class="row">
-        <!-- ================= ซ้าย (50%) ================= -->
+        <!-- ================= ฝั่งซ้าย (50%) ================= -->
         <div class="col-md-6 mb-4">
             <div class="card p-4 shadow-sm mb-4" style="border-top: 5px solid var(--gold-accent);">
             
                 <div class="monk-president mb-4 text-center shadow-sm">
-                    <h5 class="theme-color fw-bold mb-3">🙏 ประธานอุปถัมภ์ฝ่ายสงฆ์</h5>
+                    <h5 class="theme-color fw-bold mb-3">🙏 ประธานฝ่ายสงฆ์</h5>
                     
-                    <!-- รูปภาพเดิม -->
                     <div class="mb-3">
                         <img src="images/luang-ta-somporn.jpg" alt="หลวงตาสมพร" class="img-fluid rounded shadow-sm" style="max-height:250px;border:3px solid var(--gold-accent);object-fit:cover;">
                     </div>
@@ -128,133 +151,102 @@
                     <h5 class="fw-bold mb-1" style="color:var(--wood-dark);">พระครูภาวนาธรรมวิสุทธิ์ (หลวงตาสมพร ธมฺมธีโร)</h5>
                     <p class="mb-3 text-muted">เจ้าคณะอำเภอปากคาด, เจ้าอาวาสวัดสุทธิวนาราม, จังหวัดบึงกาฬ</p>
                                                       
-                        <!-- ส่วนที่แก้ไขใหม่: ปรับข้อความให้ตรงกับเนื้อหาวิดีโอและกระตุ้นศรัทธา -->
-                        <hr class="mt-2 mb-3" style="border-color:var(--gold-accent); opacity:0.4;">
-                        <div class="bg-white p-3 rounded shadow-sm" style="border: 1px dashed var(--gold-accent);">
-                            <p class="mb-1 fw-bold" style="color: var(--wood-dark); font-size: 1.05rem;">
-                                🎬 ประจักษ์บารมีธรรม หลวงตาสมพร
-                            </p>
-                            <p class="mb-3 text-muted" style="font-size: 0.9rem;">
-                                พิธีบรรจุพระบรมสารีริกธาตุ ณ พระเกศสมเด็จองค์ปฐม
-                            </p>
-                            
-                            <div class="text-center mb-2">
-                                <a href="https://www.youtube.com/shorts/3TDcwOpUObQ" 
-                                target="_blank" rel="noopener noreferrer"
-                                class="btn btn-danger shadow-sm" style="border-radius: 50px; padding: 8px 20px;">
-                                    ▶ ชมภาพมหามงคลบน YouTube
-                                </a>
-                            </div>
-                        </div>   
-                                             
+                    <hr class="mt-2 mb-3" style="border-color:var(--gold-accent); opacity:0.4;">
+                    <div class="bg-white p-3 rounded shadow-sm" style="border: 1px dashed var(--gold-accent);">
+                        <p class="mb-1 fw-bold" style="color: var(--wood-dark); font-size: 1.05rem;">
+                            🎬 ประจักษ์บารมีธรรม หลวงตาสมพร
+                        </p>
+                        <p class="mb-3 text-muted" style="font-size: 0.9rem;">
+                            พิธีบรรจุพระบรมสารีริกธาตุ ณ พระเกศสมเด็จองค์ปฐม
+                        </p>
+                        
+                        <div class="text-center mb-2">
+                            <a href="https://www.youtube.com/shorts/3TDcwOpUObQ" 
+                            target="_blank" rel="noopener noreferrer"
+                            class="btn btn-danger shadow-sm" style="border-radius: 50px; padding: 8px 20px;">
+                                ▶ ชมภาพมหามงคลบน YouTube
+                            </a>
+                        </div>
+                    </div>   
                 </div>
-                
 
                 <h4 class="theme-color fw-bold border-bottom pb-2 mt-2">🌿 ความเป็นมาและวัตถุประสงค์</h4>
-                <p class="mt-3" style="text-indent:30px;">สืบเนื่องจาก <strong>สวนไผ่อภิญญาญาณ</strong> ได้ดำเนินการก่อสร้างศาลาปฏิบัติธรรม โดยเริ่มดำเนินการก่อสร้างเมื่อวันที่ ๓ มีนาคม พ.ศ. ๒๕๖๙ และแล้วเสร็จสมบูรณ์ในวันที่ ๑๓ เมษายน พ.ศ. ๒๕๖๙ รวมระยะเวลาก่อสร้าง ๔๒ วัน</p>
-                <p style="text-indent:30px;">ได้ประกอบพิธีถวายและส่งมอบศาลาปฏิบัติธรรมให้แก่คณะสงฆ์อย่างเป็นทางการ เมื่อวันที่ ๑๖ เมษายน พ.ศ. ๒๕๖๙ โดยได้รับความเมตตาจาก <strong>พระครูศรีสุตตาลังการ เจ้าคณะอำเภอเขมราฐ จังหวัดอุบลราชธานี</strong> เป็นประธานฝ่ายสงฆ์</p>
-                <p style="text-indent:30px;">แม้ศาลาปฏิบัติธรรมจะแล้วเสร็จสมบูรณ์ <strong>แต่ยังคงขาดองค์พระประธาน</strong> ทางสวนไผ่อภิญญาญาณจึงขอบอกบุญมายังผู้มีจิตศรัทธาทุกท่าน เพื่อร่วมกันจัดตั้งกองผ้าป่าสามัคคี</p>
+                <p class="mt-3" style="text-indent:30px;">สืบเนื่องจาก <strong>สวนไผ่อภิญญาญาณ</strong> ได้ดำเนินการพัฒนาพื้นที่และก่อสร้างศาลาปฏิบัติธรรมจนแล้วเสร็จสมบูรณ์ ตลอดจนได้รับความเมตตาจากคณะสงฆ์และพลังศรัทธาของสาธุชนทุกท่าน ในการร่วมสร้างองค์พระพุทธมหาจักรพรรดิประดิษฐานเป็นมิ่งขวัญศูนย์รวมจิตใจเป็นที่เรียบร้อย</p>
+                <p style="text-indent:30px;">เพื่อให้สถานปฏิบัติธรรมแห่งนี้มีความมั่นคง ถาวร และมีพื้นที่เพียงพอที่จะรองรับพระภิกษุสงฆ์ สามเณร ตลอดจนพุทธศาสนิกชนผู้ใฝ่ธรรมในการประพฤติปฏิบัติธรรม อบรมจิตตภาวนาในระยะยาว จึงจำเป็นต้องจัดหาทุนทรัพย์เพื่อ <strong>จัดซื้อที่ดินสำหรับจัดตั้งสำนักปฏิบัติธรรมอย่างเป็นทางการ</strong></p>
 
-                <h4 class="theme-color fw-bold mt-4">✨ รายละเอียดการจัดสร้างองค์พระประธาน</h4>
-                <div class="buddha-details mt-3 mb-4 shadow-sm">
-                    <ul class="list-unstyled mb-0">
-                        <li class="mb-2"><strong>นามองค์พระ:</strong> พระพุทธมหาจักรพรรดิ (ทรงเครื่องจักรพรรดิ)</li>
-                        <li class="mb-2"><strong>วัสดุ:</strong> หล่อด้วยปูนปั้น</li>
-                        <li class="mb-2"><strong>ขนาด:</strong> หน้าตักกว้าง ๒.๕ เมตร ความสูงรวมฐานประมาณ ๔.๕ เมตร</li>
-                        <li class="mb-2"><strong>สถานที่ประดิษฐาน:</strong> ศาลาธรรม สวนไผ่อภิญญาญาณ อ.เขมราฐ จ.อุบลราชธานี</li>
-                        <li><strong>มงคลฤกษ์:</strong> วันที่ ๒๐ มิถุนายน ๒๕๖๙ เวลา ๐๘.๐๐ น.</li>
+                <div class="p-3 my-3 rounded shadow-sm" style="background-color: var(--gold-light); border-left: 4px solid var(--gold-accent);">
+                    <h5 class="fw-bold mb-2" style="color: var(--wood-dark);">✨ อานิสงส์การถวายที่ดินเพื่อพระพุทธศาสนา</h5>
+                    <p class="mb-0" style="font-size: 0.95rem; line-height: 1.6;">
+                        การถวายที่ดินจัดตั้งวัดหรือสำนักปฏิบัติธรรม ถือเป็นยอดแห่งทานบารมีฝ่ายวัตถุทาน เป็นการสร้างรากฐานอันมั่นคงให้พระพุทธศาสนาดำรงอยู่คู่แผ่นดิน ผู้ร่วมบุญย่อมได้อานิสงส์ให้ชีวิตมีความมั่นคงในฐานะ ครอบครัว และหน้าที่การงาน ปราศจากอุปสรรค เจริญงอกงามไพบูลย์ตราบเข้าสู่พระนิพพาน
+                    </p>
+                </div>
+
+                <!-- กล่องรายละเอียดโครงการจัดซื้อที่ดิน -->
+                <div class="card p-3 my-3 shadow-sm" style="border: 1px solid rgba(196,154,69,0.3); background-color: #fdfcf9; border-radius: 10px;">
+                    <h5 class="fw-bold mb-3 theme-color d-flex align-items-center">
+                        <span class="me-2">📜</span> รายละเอียดโครงการจัดซื้อที่ดิน
+                    </h5>
+                    
+                    <p class="mb-2" style="font-size: 0.95rem; line-height: 1.6;">
+                        ที่ดินแปลงจัดตั้งสำนักปฏิบัติธรรม สวนไผ่อภิญญาญาณ มีเนื้อที่รวม <strong>๑๙ ไร่ ๑ งาน ๔๐ ตารางวา</strong> (พร้อมสิ่งปลูกสร้าง) มูลค่าจัดซื้อรวมทั้งสิ้น <strong>๓,๐๐๐,๐๐๐ บาท</strong>
+                    </p>
+
+                    <!-- แถบแสดงความคืบหน้า -->
+                    <div class="p-2 mb-3 rounded" style="background-color: var(--gold-light);">
+                        <div class="d-flex justify-content-between small fw-bold mb-1" style="color: var(--wood-dark);">
+                            <span>ชำระแล้ว: ๑,๒๐๐,๐๐๐ บาท</span>
+                            <span>คงเหลือ: ๑,๘๐๐,๐๐๐ บาท</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar" role="progressbar" style="width: 40%; background-color: var(--bamboo-green);" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <small class="text-muted d-block text-end mt-1" style="font-size: 0.75rem;">(สำเร็จแล้วประมาณ 40%)</small>
+                    </div>
+
+                    <p class="small fw-bold mb-1" style="color: var(--wood-dark);">กำหนดแผนการระดมทุนแบ่งชำระ ๓ งวด (ไม่มีดอกเบี้ย):</p>
+                    <ul class="small mb-3 text-muted ps-3" style="line-height: 1.6;">
+                        <li><strong>งวดปลายปี ๒๕๖๙ :</strong> ๖๐๐,๐๐๐ บาท <em>(สมทบทุนผ่านกฐินสามัคคีครั้งนี้)</em></li>
+                        <li><strong>งวดปลายปี ๒๕๗๐ :</strong> ๖๐๐,๐๐๐ บาท</li>
+                        <li><strong>งวดปลายปี ๒๕๗๑ :</strong> ๖๐๐,๐๐๐ บาท <em>(งวดสุดท้ายเพื่อโอนกรรมสิทธิ์)</em></li>
                     </ul>
+
+                    <!-- 🗺️ ส่วนแสดงแผนที่แปลงที่ดิน / เอกสารสิทธิ์ -->
+                    <hr style="border-color: rgba(196,154,69,0.3); margin: 15px 0;">
+                    
+                    <div class="text-center p-2 rounded" style="background-color: #ffffff; border: 1px dashed var(--gold-accent);">
+                        <span class="badge mb-2 px-3 py-1 fw-semibold" style="background-color: var(--gold-light); color: var(--wood-dark); font-size: 0.85rem;">
+                            🗺️ รูปแผนที่แปลงที่ดิน (มาตราส่วน ๑ : ๕๐๐๐)
+                        </span>
+
+                        <!-- ภาพตัวอย่างแผนที่ -->
+                        <div class="my-2 text-center">
+                            <img src="images/land-map-deed.jpg" 
+                                 alt="รูปแผนที่แปลงที่ดิน" 
+                                 class="img-fluid rounded border shadow-sm" 
+                                 style="max-height: 220px; cursor: pointer; transition: transform .2s;" 
+                                 onclick="openModal(this.src)" 
+                                 onmouseover="this.style.transform='scale(1.02)'" 
+                                 onmouseout="this.style.transform='scale(1)'">
+                            <small class="text-muted d-block mt-1" style="font-size: 0.75rem;">(คลิกที่รูปเพื่อเปิดดูภาพขยาย)</small>
+                        </div>
+
+                        <!-- ปุ่มเปิดดูไฟล์ PDF -->
+                        <div class="mt-2">
+                            <a href="docs/รูปแผนที่แปลงที่ดิน.pdf" target="_blank" class="btn btn-sm btn-outline-success rounded-pill px-3 shadow-sm">
+                                📄 เปิดดูเอกสาร PDF ฉบับเต็ม
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
 
-                <h4 class="theme-color fw-bold mt-4">🧧 ระดับเจ้าภาพ</h4>
-                <div class="row text-center mb-4 mt-3">
-                    <div class="col-md-4 col-sm-4 mb-2"><div class="card sponsor-card tier-1 h-100 shadow-sm"><div class="card-header px-1">ประธานอุปถัมภ์</div><div class="card-body p-2 d-flex align-items-center justify-content-center"><h6 class="theme-color fw-bold mb-0">๕,๐๐๐ บาท</h6></div></div></div>
-                    <div class="col-md-4 col-sm-4 mb-2"><div class="card sponsor-card tier-2 h-100 shadow-sm"><div class="card-header px-1">รองประธานอุปถัมภ์</div><div class="card-body p-2 d-flex align-items-center justify-content-center"><h6 class="theme-color fw-bold mb-0">๓,๐๐๐ บาท</h6></div></div></div>
-                    <div class="col-md-4 col-sm-4 mb-2"><div class="card sponsor-card tier-3 h-100 shadow-sm"><div class="card-header px-1">ประธาน</div><div class="card-body p-2 d-flex align-items-center justify-content-center"><h6 class="theme-color fw-bold mb-0">๑,๐๐๐ บาท</h6></div></div></div>
-                </div>
-
-                <h4 class="theme-color fw-bold border-bottom pb-2 mt-4">📅 กำหนดการ</h4>
+                <h4 class="theme-color fw-bold border-bottom pb-2 mt-4">📅 กำหนดการทอดกฐินสามัคคี</h4>
                 <ul class="list-group list-group-flush mt-3 mb-4">
-                    <li class="list-group-item bg-transparent px-0"><strong>วันศุกร์ที่ ๑๙ มิถุนายน ๒๕๖๙ (วันรวม)</strong><br>๑๕.๐๐ น. ตั้งองค์ผ้าป่าสามัคคี &nbsp;|&nbsp; ๑๙.๐๐ น. เจริญพระพุทธมนต์</li>
-                    <li class="list-group-item bg-transparent px-0"><strong>วันเสาร์ที่ ๒๐ มิถุนายน ๒๕๖๙ (วันทอดถวาย)</strong><br>๐๗.๓๐ น. ถวายภัตตาหารเช้า &nbsp;|&nbsp; ๐๘.๐๐ น. พิธีมงคลฤกษ์ &nbsp;|&nbsp; ๐๙.๓๙ น. ทอดถวายผ้าป่า</li>
+                    <li class="list-group-item bg-transparent px-0"><strong>วันจันทร์ที่ ๒๓ พฤศจิกายน ๒๕๖๙ (วันรวม)</strong><br>๑๕.๐๐ น. ตั้งองค์กฐินสามัคคี &nbsp;|&nbsp; ๑๙.๐๐ น. เจริญพระพุทธมนต์สมโภชองค์กฐิน</li>
+                    <li class="list-group-item bg-transparent px-0"><strong>วันอังคารที่ ๒๔ พฤศจิกายน ๒๕๖๙ (วันทอดถวาย)</strong><br>๐๗.๓๐ น. ถวายภัตตาหารเช้า &nbsp;|&nbsp; ๐๙.๓๙ น. พิธีทอดถวายผ้ากฐินสามัคคี</li>
                 </ul>
 
-                <h4 class="theme-color fw-bold border-bottom pb-2 mt-4">📊 งบประมาณ (ประมาณ ๓๗๐,๐๐๐ บาท)</h4>
-                <div class="accordion shadow-sm mt-3" id="budgetAccordion">
-                    <!-- ส่วนที่ 1 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c1">ส่วนที่ ๑: งานโครงสร้างและฐานราก (๔๕,๐๐๐ บาท)</button></h2>
-                        <div id="c1" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
-                            <div class="accordion-body"><ul><li>งานขุดดิน เทฐานราก และผูกเหล็กเส้น</li><li>งานก่ออิฐ เทปูน โครงสร้างฐานชุกชี</li><li>จัดเตรียมช่องว่างบรรจุสิ่งมงคล</li></ul></div>
-                        </div>
-                    </div>
-                    
-                    <!-- ส่วนที่ 2 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c2">ส่วนที่ ๒: งานหล่อขึ้นรูปองค์พระ (๒๓๐,๐๐๐ บาท)</button></h2>
-                        <div id="c2" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
-                            <div class="accordion-body"><ul><li>หล่อด้วยปูนคอนกรีตเสริมเหล็กตลอดทั้งองค์</li><li>ค่าบล็อกแม่พิมพ์/นั่งร้าน และค่าแรงช่าง</li></ul></div>
-                        </div>
-                    </div>
-                    
-                    <!-- ส่วนที่ 3 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c3">ส่วนที่ ๓: งานตกแต่งพื้นผิว (๖๐,๐๐๐ บาท)</button></h2>
-                        <div id="c3" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
-                            <div class="accordion-body"><ul><li>งานขัดแต่งพื้นผิว ทาสีรองพื้นและสีทองคำ</li><li>งานประดับพลอยหรือคริสตัลบนเครื่องทรง</li></ul></div>
-                        </div>
-                    </div>
-                    
-                    <!-- ส่วนที่ 4 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c4">ส่วนที่ ๔: พิธีมงคลและค่าใช้จ่ายเบ็ดเตล็ด (๓๕,๐๐๐ บาท)</button></h2>
-                        <div id="c4" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
-                            <div class="accordion-body"><ul><li>จัดเตรียมสถานที่ เครื่องบวงสรวง บายศรี</li><li>จตุปัจจัยไทยธรรมถวายพระสงฆ์</li></ul></div>
-                        </div>
-                    </div>
-
-                    <!-- ส่วนที่ 5 (เพิ่มใหม่) -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c5">
-                                ส่วนที่ ๕: แผนบริหารจัดการปัจจัยบริจาคส่วนเกิน
-                            </button>
-                        </h2>
-                        <div id="c5" class="accordion-collapse collapse" data-bs-parent="#budgetAccordion">
-                            <div class="accordion-body" style="font-size: 0.95rem; line-height: 1.6;">
-                                <p class="mb-3 text-muted"><em>(กรณีมียอดร่วมบุญเกินกว่า ๓๗๐,๐๐๐ บาท)</em><br>
-                                ด้วยพลังศรัทธาของผู้มีจิตศรัทธาทุกท่าน หากมียอดปัจจัยร่วมบุญสูงกว่างบประมาณเบื้องต้นที่กำหนดไว้ คณะผู้จัดสร้างมีเจตนารมณ์อันแน่วแน่ที่จะนำปัจจัยส่วนเกินทั้งหมดไปบริหารจัดการ เพื่อยกระดับความวิจิตรตระการตาขององค์พระ และสร้างความยั่งยืนให้แก่สถานปฏิบัติธรรม โดยกำหนดลำดับความสำคัญ ดังต่อไปนี้:</p>
-                                
-                                <h6 class="fw-bold mt-3" style="color: var(--wood-dark);">ลำดับที่ ๑: ต่อยอดงานตกแต่งเครื่องทรงและผิวองค์พระ <span class="fw-normal text-muted">(สมทบงบประมาณในส่วนที่ ๓)</span></h6>
-                                <p class="mb-1">เพื่อยกระดับพุทธศิลป์ให้มีความวิจิตรตระการตา สมพระเกียรติสูงสุด โครงการจะนำปัจจัยมาดำเนินการ ดังนี้:</p>
-                                <ul class="mb-3">
-                                    <li class="mb-1"><strong>ยกระดับผิวทอง:</strong> เปลี่ยนจากการทาสีทอง เป็น “การปิดทองคำเปลวแท้” บริเวณพระพักตร์ องค์พระ และเครื่องทรง เพื่อความสุกปลั่งงดงาม และเป็นพุทธบูชาอันประณีตสูงสุด</li>
-                                    <li><strong>ยกระดับเครื่องทรงมหาจักรพรรดิ:</strong> ใช้อัญมณีหรือคริสตัลเกรดพรีเมียม ที่มีความแวววาวและทนทานต่อแสงแดด เพื่อเพิ่มความประณีตและคุณค่าทางศิลป์ขององค์พระ</li>
-                                </ul>
-
-                                <h6 class="fw-bold mt-3" style="color: var(--wood-dark);">ลำดับที่ ๒: งานภูมิทัศน์และแสงสว่างรอบองค์พระ</h6>
-                                <p class="mb-1">เพื่อให้สถานที่แห่งนี้เป็น “แสงสว่างแห่งชายแดน” อย่างแท้จริง ปัจจัยส่วนหนึ่งจะนำไปใช้ใน:</p>
-                                <ul class="mb-3">
-                                    <li class="mb-1"><strong>การติดตั้งระบบไฟส่องสว่าง (Solar Spotlight):</strong> เพื่อส่ององค์พระในเวลากลางคืน ให้เป็นศูนย์รวมจิตใจของชุมชน สร้างความรู้สึกปลอดภัยและอบอุ่นใจแก่ประชาชนตามแนวชายแดน</li>
-                                    <li><strong>การปรับปรุงภูมิทัศน์ลานธรรม:</strong> ปูพื้นกระเบื้องหรือเทคอนกรีตรอบฐานพระ เพื่อให้พุทธศาสนิกชนสามารถกราบสักการะ นั่งสมาธิ และทำกิจกรรมชุมชนได้อย่างสะดวกและเป็นระเบียบเรียบร้อย</li>
-                                </ul>
-
-                                <h6 class="fw-bold mt-3" style="color: var(--wood-dark);">ลำดับที่ ๓: กองทุนบำรุงรักษาสะพานบุญ</h6>
-                                <p class="mb-1">เนื่องจากสถานปฏิบัติธรรมเพิ่งก่อตั้งได้ไม่นาน ปัจจัยส่วนที่เหลือ (หากมี) จะนำไปจัดตั้งเป็น “กองทุนบำรุงรักษาสะพานบุญ” เพื่อรองรับค่าใช้จ่ายในระยะยาว เช่น</p>
-                                <ul class="mb-3">
-                                    <li>ค่าน้ำ ค่าไฟ</li>
-                                    <li>การดูแลรักษาศาลาธรรมและพื้นที่โดยรอบ</li>
-                                </ul>
-                                
-                                <div class="text-center mt-3 p-2 rounded" style="background-color: var(--gold-light);">
-                                    <strong class="theme-color">เพื่อให้สถานปฏิบัติธรรมแห่งนี้สามารถดำรงอยู่เป็นศูนย์รวมจิตใจของชุมชนได้อย่างมั่นคงและยั่งยืนสืบไป</strong>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center mt-5">
+                <div class="text-center mt-4">
                     <a href="https://maps.app.goo.gl/ChyUkapJmLAAtbpN9" target="_blank" class="btn btn-custom btn-lg fw-bold rounded-pill px-4 shadow-sm mb-4">📍 กดที่ปุ่มนี้เพื่อเปิด Google Maps</a>
                     <div class="mt-2 text-center">
                         <img src="images/map.png" alt="แผนที่สวนไผ่อภิญญาญาณ" class="img-fluid rounded shadow-sm" style="border: 3px solid var(--gold-accent); cursor: pointer; transition: transform .3s;" onclick="openModal(this.src)" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
@@ -263,15 +255,20 @@
             </div>
         </div>
 
-        <!-- ================= ขวา (50%) ================= -->
+        <!-- ================= ฝั่งขวา (50%) ================= -->
         <div class="col-md-6 mb-4">
             
-            <!-- 📜 การ์ดรายนามเจ้าภาพทอดผ้าป่าสามัคคี -->
+            <!-- 📜 การ์ดอนุโมทนาบุญสร้างพระพุทธมหาจักรพรรดิเดิม -->
             <div class="card p-4 mb-4 shadow-sm text-center" style="background-color: #fffcf8; border-top: 5px solid var(--gold-accent);">
                 
-                <div class="text-center mb-4">
-                    <img src="images/seal.jpg" alt="ตราสัญลักษณ์ สวนไผ่อภิญญาญาณ" class="img-fluid rounded-circle mb-3 shadow-sm" style="max-width: 180px; border: 2px solid var(--gold-accent); padding: 5px; background: white;">
-                    <h3 class="theme-color fw-bold border-bottom pb-3 mt-2">📜 รายนามเจ้าภาพทอดผ้าป่าสามัคคี</h3>
+                <div class="text-center mb-3">
+                    <img src="images/seal.jpg" alt="ตราสัญลักษณ์ สวนไผ่อภิญญาญาณ" class="img-fluid rounded-circle mb-3 shadow-sm" style="max-width: 150px; border: 2px solid var(--gold-accent); padding: 5px; background: white;">
+                    <h4 class="theme-color fw-bold mb-2">🙏 ขออนุโมทนาบุญกับคณะเจ้าภาพ</h4>
+                    <p class="text-muted mb-3" style="font-size: 0.95rem; line-height: 1.6;">
+                        ผู้ร่วมบุญสร้าง <strong>พระพุทธมหาจักรพรรดิ</strong> แล้วเสร็จ<br>
+                        และประกอบพิธีน้อมถวายแด่คณะสงฆ์ เมื่อวันที่ ๑๕ สิงหาคม พ.ศ. ๒๕๖๙
+                    </p>
+                    <hr style="border-color:var(--gold-accent); opacity:0.3; width: 60%; margin: 0 auto;">
                 </div>
                 
                 <div class="mt-2">
@@ -296,9 +293,17 @@
                 </div>
             </div>
 
-            <!-- 🙏 การ์ดร่วมทำบุญได้ที่ -->
+            <!-- 🙏 การ์ดเชิญชวนต่อยอดบุญกฐิน & ร่วมทำบุญ -->
             <div class="card p-4 text-center shadow-sm" style="border-top: 5px solid var(--gold-accent);">
-                <h4 class="theme-color fw-bold mb-4">🙏 ร่วมทำบุญได้ที่</h4>
+                
+                <div class="p-3 mb-4 rounded text-start shadow-sm" style="background: var(--gold-light); border-left: 5px solid var(--gold-accent);">
+                    <h5 class="fw-bold mb-2" style="color: var(--wood-dark);">🌾 บัดนี้ ขอกราบเรียนเชิญทุกท่านร่วมต่อยอดบุญ</h5>
+                    <p class="mb-0" style="font-size: 0.95rem; line-height: 1.6; color: #444;">
+                        ขอกราบอาราธนาและเรียนเชิญคณะเจ้าภาพทุกสายบุญ ตลอดจนท่านสาธุชนผู้มีจิตศรัทธาทุกท่าน ร่วมต่อยอดมหากุศลสู่งาน <strong>ทอดกฐินสามัคคีเพื่อจัดซื้อที่ดินจัดตั้งสำนักปฏิบัติธรรม สวนไผ่อภิญญาญาณ</strong> ร่วมกันตามกำลังศรัทธา เพื่อสืบทอดอายุพระพุทธศาสนาให้มั่นคงสืบไป
+                    </p>
+                </div>
+
+                <h4 class="theme-color fw-bold mb-3">ร่วมทำบุญสมทบทุนจัดซื้อที่ดินได้ที่</h4>
                 
                 <div class="p-3 mb-4 mx-auto bg-white border rounded shadow-sm" style="max-width:220px;">
                     <img src="images/qr-code.jpg" alt="QR" class="img-fluid rounded">
@@ -325,24 +330,10 @@
                     </div>
                     
                     <div class="mb-0 text-muted" style="line-height:1.6; font-size: 0.95em;">
-                        <p class="mb-3"><strong style="color:var(--wood-dark);">เรียน ท่านผู้มีจิตศรัทธาและกัลยาณมิตรทุกท่าน</strong><br>
-                        คณะผู้จัดทำขอกราบเรียนเชิญทุกท่านร่วมสร้างมหากุศลในวาระบุญครั้งนี้ โดยท่านสามารถร่วมสมทบทุนได้ตามกำลังศรัทธา ไม่มีการกำหนดเกณฑ์ขั้นต่ำแต่อย่างใด ทุกยอดปัจจัยล้วนเป็นมหากุศลอันยิ่งใหญ่ในการอุปถัมภ์พระศาสนาร่วมกัน</p>
+                        <p class="mb-2"><strong style="color:var(--wood-dark);">เรียน ท่านผู้มีจิตศรัทธาและกัลยาณมิตรทุกท่าน</strong><br>
+                        ท่านสามารถร่วมทำบุญได้ตามกำลังศรัทธา ไม่มีการกำหนดเกณฑ์ขั้นต่ำแต่อย่างใด ทุกยอดปัจจัยล้วนเป็นมหากุศลอันยิ่งใหญ่ในการสร้างแผ่นดินธรรม</p>
                         
-                        <ul class="ps-3 mb-3">
-                            <li class="mb-2"><strong>การร่วมบุญในนามหมู่คณะ:</strong> หากท่านมีความประสงค์จะร่วมสมทบทุนในนามของครอบครัว หรือกลุ่มกัลยาณมิตร ท่านสามารถรวบรวมปัจจัยและแจ้งความประสงค์ในนามคณะได้ตามความสะดวก</li>
-                            <li class="mb-2"><strong>การแจ้งหลักฐานการร่วมสมทบทุน:</strong> เมื่อท่านได้ดำเนินการโอนปัจจัยเรียบร้อยแล้ว ขอความกรุณาส่งหลักฐาน พร้อมระบุ "ชื่อ-นามสกุล" หรือ "ชื่อคณะ" เพื่อให้คณะทำงานได้รวบรวมข้อมูลอย่างถูกต้องครบถ้วน</li>
-                        </ul>
-                        
-                        <!-- ปุ่มดาวน์โหลด/ดู PDF ซองผ้าป่า -->
-                        <div class="text-center my-4">
-                            <a href="ซองเจ้าภาพทอดผ้าป่าสามัคคี_สร้างพระพุทธมหาจักรพรรดิ_2569.pdf" target="_blank" class="btn btn-custom rounded-pill px-4 py-2 shadow-sm" style="font-size: 0.95rem;">
-                                📥 คลิกเพื่อดูและดาวน์โหลดรายละเอียดซองผ้าป่า (PDF)
-                            </a>
-                        </div>
-                        
-                        <div class="p-3 mt-3 rounded shadow-sm" style="background-color: var(--gold-light); border-left: 4px solid var(--gold-accent);">
-                            <strong style="color:var(--wood-dark);">หมายเหตุ:</strong> อนึ่ง เนื่องจากขณะนี้การจัดพิมพ์ซองผ้าป่าได้ดำเนินการเสร็จสิ้นเป็นที่เรียบร้อยแล้ว คณะทำงานจึงขออนุญาตนำรายชื่อของผู้ร่วมสมทบทุนทุกท่าน รวบรวมขึ้นเป็นทำเนียบสะพานบุญผ่านทาง <strong>"เว็บไซต์หลัก"</strong> ทั้งนี้ <strong>เพื่อให้ทางสวนไผ่อภิญญาญาณ ได้รับทราบถึงเจตนาอันเป็นกุศล และสามารถใช้เป็นข้อมูลในการประกาศเกียรติคุณ พร้อมทั้งเจริญพรอนุโมทนาบุญ</strong> แก่ท่านผู้มีจิตศรัทธาทุกท่านได้อย่างสมบูรณ์ครบถ้วนสืบไป
-                        </div>
+                        <p class="mb-0">เมื่อโอนปัจจัยเรียบร้อยแล้ว ขอความกรุณาส่งหลักฐานพร้อมระบุ "ชื่อ-นามสกุล" ทาง Line ID เพื่อให้คณะทำงานบันทึกรวบรวมทำเนียบบุญและอนุโมทนาบุญสืบไป</p>
                     </div>
                 </div>
 
@@ -353,15 +344,42 @@
         </div>
     </div>
 
-    <!-- Gallery -->
+    <!-- ================= ภาพบรรยากาศวันงาน ================= -->
     <div class="row mt-4 mb-4">
-        <div class="col-12"><div class="d-flex align-items-center mb-4"><hr class="flex-grow-1" style="border-color:var(--gold-accent);opacity:.5;"><h3 class="theme-color fw-bold mx-3 mb-0 text-center">📸 ภาพบรรยากาศสวนไผ่อภิญญาญาณ</h3><hr class="flex-grow-1" style="border-color:var(--gold-accent);opacity:.5;"></div></div>
-        <div class="col-md-4 col-sm-6"><img src="images/gallery1.jpg" alt="1" class="gallery-img" onclick="openModal(this.src)"></div>
-        <div class="col-md-4 col-sm-6"><img src="images/gallery2.jpg" alt="2" class="gallery-img" onclick="openModal(this.src)"></div>
-        <div class="col-md-4 col-sm-6"><img src="images/gallery3.jpg" alt="3" class="gallery-img" onclick="openModal(this.src)"></div>
-        <div class="col-md-4 col-sm-6"><img src="images/gallery4.jpg" alt="4" class="gallery-img" onclick="openModal(this.src)"></div>
-        <div class="col-md-4 col-sm-6"><img src="images/gallery5.jpg" alt="5" class="gallery-img" onclick="openModal(this.src)"></div>
-        <div class="col-md-4 col-sm-6"><img src="images/gallery6.jpg" alt="6" class="gallery-img" onclick="openModal(this.src)"></div>
+        <div class="col-12 text-center mb-3">
+            <div class="d-flex align-items-center mb-3">
+                <hr class="flex-grow-1" style="border-color:var(--gold-accent);opacity:.5;">
+                <h3 class="theme-color fw-bold mx-3 mb-0">📸 ภาพบรรยากาศพิธีน้อมถวายพระพุทธมหาจักรพรรดิ</h3>
+                <hr class="flex-grow-1" style="border-color:var(--gold-accent);opacity:.5;">
+            </div>
+            <p class="text-muted mb-4" style="font-size: 0.95rem;">
+                ภาพประวัติศาสตร์แห่งมหาบารมี ณ สวนไผ่อภิญญาญาณ (๑๕ สิงหาคม พ.ศ. ๒๕๖๙)
+            </p>
+        </div>
+
+        <!-- 🎞️ สไลด์โชว์ Carousel -->
+        <div class="col-lg-10 mx-auto mb-4">
+            <div id="ceremonyCarousel" class="carousel slide carousel-fade shadow rounded-4 overflow-hidden" 
+                 data-bs-ride="carousel" data-bs-interval="3500" 
+                 style="border: 3px solid var(--gold-accent); background-color: #111;">
+                
+                <div class="carousel-inner" id="carouselInner"></div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#ceremonyCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));"></span>
+                    <span class="visually-hidden">ก่อนหน้า</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#ceremonyCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true" style="filter: drop-shadow(0 2px 4px rgba(0,0,0,0.7));"></span>
+                    <span class="visually-hidden">ถัดไป</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- 🎲 ภาพไฮไลท์ 6 ภาพ (สลับอัตโนมัติ ไม่ซ้ำ และไม่มีช่องว่างสีขาว) -->
+        <div class="col-12 mt-3">
+            <div class="row g-3" id="randomGridContainer"></div>
+        </div>
     </div>
 
 </div>
@@ -371,7 +389,6 @@
         <p class="mb-1 text-light">ขออำนาจคุณพระศรีรัตนตรัย และสิ่งศักดิ์สิทธิ์ทั้งหลายในสากลโลก จงดลบันดาลให้ท่านและครอบครัว</p>
         <p class="mb-0 text-warning fw-bold fs-5">ประสบแต่ความสุข ความเจริญ ด้วยอายุ วรรณะ สุขะ พละ ปฏิภาณธนสารสมบัติ ทุกประการเทอญ</p>
         
-        <!-- ส่วนที่เพิ่มใหม่: ปุ่ม Facebook Page -->
         <div class="mt-4 mb-2">
             <a href="https://www.facebook.com/profile.php?id=61589592265855" target="_blank" rel="noopener noreferrer" class="btn shadow-sm px-4 py-2" style="background-color: #1877F2; color: white; border-radius: 50px; font-weight: 500; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-facebook me-2" viewBox="0 0 16 16" style="margin-top: -3px;">
@@ -380,7 +397,6 @@
                 ติดตามข่าวสารทาง Facebook Page
             </a>
         </div>
-        <!-- สิ้นสุดส่วนที่เพิ่มใหม่ -->
 
         <hr class="my-4" style="border-color:rgba(255,255,255,.1);">
         <small style="color:#a89f91;">64 หมู่ 16 บ้านดอนบาก ตำบลเขมราฐ อำเภอเขมราฐ จังหวัดอุบลราชธานี 34170 | โทร. 095-641-5952</small>
@@ -412,34 +428,28 @@ function openModal(src) {
 // ── ดึงข้อมูลรายชื่อเจ้าภาพจาก CSV มาแสดงผลแบบ Dynamic ───────────────
 async function loadSponsorsFromCSV() {
     try {
-        // ดึงไฟล์ data.csv
         const response = await fetch('data.csv');
         if (!response.ok) throw new Error('ไม่สามารถโหลดไฟล์ CSV ได้');
         
         const csvText = await response.text();
-
-        // แยกข้อมูลทีละบรรทัด และลบช่องว่างหัวท้าย
         const lines = csvText.trim().split('\n');
         
-        const tier1 = []; // ประธานอุปถัมภ์
-        const tier2 = []; // รองประธานอุปถัมภ์
-        const tier3 = []; // ประธาน
+        const tier1 = [];
+        const tier2 = [];
+        const tier3 = [];
 
-        // เริ่มลูปที่ i=1 เพื่อข้ามบรรทัดแรกที่เป็น Header (first_name,last_name,...)
         for (let i = 1; i < lines.length; i++) {
             const line = lines[i].trim();
-            if (!line) continue; // ข้ามบรรทัดว่าง
+            if (!line) continue;
 
             const cols = line.split(','); 
             if (cols.length >= 4) {
                 const firstName = cols[0].trim();
                 const lastName = cols[1].trim();
-                const type = cols[3].trim(); // คอลัมน์ที่ 4 (index 3) คือ type
+                const type = cols[3].trim();
                 
-                // รวมชื่อและนามสกุล
                 const fullName = `${firstName} ${lastName}`;
 
-                // จัดหมวดหมู่ตาม Type
                 if (type === 'ประธานอุปถัมภ์') {
                     tier1.push(fullName);
                 } else if (type === 'รองประธานอุปถัมภ์') {
@@ -450,10 +460,9 @@ async function loadSponsorsFromCSV() {
             }
         }
 
-        // ฟังก์ชันสำหรับนำข้อมูลไปแสดงบน HTML
         const renderList = (id, data) => {
             const ul = document.getElementById(id);
-            ul.innerHTML = ''; // ล้างข้อความ "กำลังโหลดรายชื่อ..."
+            ul.innerHTML = '';
             
             if (data.length === 0) {
                 ul.innerHTML = '<li style="color:gray; list-style-type:none; margin-left:-20px;">- ยังไม่มีรายชื่อ -</li>';
@@ -467,7 +476,6 @@ async function loadSponsorsFromCSV() {
             });
         };
 
-        // ส่งข้อมูลไปอัปเดตในแต่ละหมวดหมู่
         renderList('tier-1-list', tier1);
         renderList('tier-2-list', tier2);
         renderList('tier-3-list', tier3);
@@ -480,8 +488,153 @@ async function loadSponsorsFromCSV() {
     }
 }
 
-// โหลดข้อมูลเมื่อหน้าเว็บเปิดขึ้นมา
-document.addEventListener('DOMContentLoaded', loadSponsorsFromCSV);
+// ── ระบบจัดการรูปภาพ: ตรวจจับไฟล์ที่มีอยู่จริง ป้องกัน Error 100% ────
+const MAX_PHOTOS_CHECK = 30; // สแกนหารูปตั้งแต่ 1 ถึง 30
+let validPhotos = [];        // เก็บเฉพาะรูปที่ตรวจสอบแล้วว่าโหลดได้จริง
+let currentlyDisplayedPhotos = [];
+
+// ฟังก์ชันสลับลำดับแบบ Fisher-Yates Shuffle
+function shuffle(array) {
+    const arr = [...array];
+    for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+}
+
+// ฟังก์ชันตรวจสอบว่าไฟล์รูปไหนเปิดได้จริง (ลองทั้ง .jpg, .JPG, .jpeg, .png)
+function findValidPhoto(index) {
+    const extensions = ['jpg', 'JPG', 'jpeg', 'png'];
+    return new Promise((resolve) => {
+        let currentExtIndex = 0;
+
+        function tryNext() {
+            if (currentExtIndex >= extensions.length) {
+                resolve(null); // ไม่มีไฟล์นี้
+                return;
+            }
+
+            const testUrl = `images/${index}.${extensions[currentExtIndex]}`;
+            const img = new Image();
+            img.onload = () => resolve(testUrl);
+            img.onerror = () => {
+                currentExtIndex++;
+                tryNext();
+            };
+            img.src = testUrl;
+        }
+
+        tryNext();
+    });
+}
+
+// ค้นหาและเตรียมคลังภาพทั้งหมดที่มีอยู่จริง
+async function scanAndCollectValidPhotos() {
+    const checks = [];
+    for (let i = 1; i <= MAX_PHOTOS_CHECK; i++) {
+        checks.push(findValidPhoto(i));
+    }
+    const results = await Promise.all(checks);
+    validPhotos = results.filter(url => url !== null);
+
+    // กรณีที่หาไม่เจอเลยแม้แต่รูปเดียว ให้ใช้รูปปกเป็นตัวสำรอง
+    if (validPhotos.length === 0) {
+        validPhotos = ['images/cover.jpg'];
+    }
+}
+
+// 1. ฟังก์ชันสร้าง Carousel สไลด์เลื่อนรูปอัตโนมัติ
+function initCeremonyCarousel() {
+    const carouselInner = document.getElementById('carouselInner');
+    if (!carouselInner || validPhotos.length === 0) return;
+
+    const shuffled = shuffle(validPhotos);
+    carouselInner.innerHTML = '';
+
+    shuffled.forEach((src, index) => {
+        const item = document.createElement('div');
+        item.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+        item.innerHTML = `
+            <img src="${src}" alt="ภาพบรรยากาศที่ ${index + 1}" 
+                 onclick="openModal(this.src)" 
+                 title="คลิกเพื่อดูภาพขยาย">
+        `;
+        carouselInner.appendChild(item);
+    });
+}
+
+// 2. ฟังก์ชันเลือก 6 ภาพที่ไม่ซ้ำ และไม่ซ้ำกับชุดเดิม
+function getNextSixUniquePhotos() {
+    const targetCount = Math.min(6, validPhotos.length);
+
+    // สุ่มจากรูปที่ยังไม่ได้โชว์อยู่ในปัจจุบัน
+    let pool = validPhotos.filter(src => !currentlyDisplayedPhotos.includes(src));
+
+    // ถ้าเหลือรูปใน Pool ไม่พอ 6 รูป ให้นำรูปทั้งหมดมาสลับใหม่
+    if (pool.length < targetCount) {
+        pool = shuffle(validPhotos);
+    }
+
+    const selected = shuffle(pool).slice(0, targetCount);
+    currentlyDisplayedPhotos = selected;
+    return selected;
+}
+
+// 3. ฟังก์ชันเรนเดอร์ภาพ 6 รูปใน Grid
+function populateGrid() {
+    const gridContainer = document.getElementById('randomGridContainer');
+    if (!gridContainer || validPhotos.length === 0) return;
+
+    const uniquePhotos = getNextSixUniquePhotos();
+    gridContainer.innerHTML = '';
+
+    uniquePhotos.forEach(src => {
+        const col = document.createElement('div');
+        col.className = 'col-6 col-md-4 col-lg-2';
+        col.innerHTML = `
+            <img src="${src}" alt="ภาพบรรยากาศวันงาน" 
+                 class="grid-thumb-img" 
+                 onclick="openModal(this.src)" 
+                 title="คลิกเพื่อดูภาพขยาย">
+        `;
+        gridContainer.appendChild(col);
+    });
+}
+
+// 4. สลับรูปภาพอย่างนุ่มนวล (Fade Out / Fade In)
+function renderRandomGrid() {
+    const gridContainer = document.getElementById('randomGridContainer');
+    if (!gridContainer) return;
+
+    gridContainer.classList.add('grid-fading');
+    setTimeout(() => {
+        populateGrid();
+        gridContainer.classList.remove('grid-fading');
+    }, 450);
+}
+
+// 5. ระบบตั้งเวลาสลับภาพอัตโนมัติ (ทุก 5 วินาที)
+let autoShuffleInterval = null;
+function startAutoShuffle() {
+    if (autoShuffleInterval) clearInterval(autoShuffleInterval);
+    autoShuffleInterval = setInterval(() => {
+        renderRandomGrid();
+    }, 5000);
+}
+
+// เริ่มการทำงานเมื่อโหลดหน้าเว็บ
+document.addEventListener('DOMContentLoaded', async () => {
+    loadSponsorsFromCSV();
+    
+    // 1. ตรวจเช็กไฟล์ที่มีอยู่จริงในโฟลเดอร์ก่อน
+    await scanAndCollectValidPhotos();
+    
+    // 2. นำภาพที่เปิดได้แน่นอน 100% ไปแสดงผล
+    initCeremonyCarousel();
+    populateGrid();
+    startAutoShuffle();
+});
 </script>
 </body>
 </html>
